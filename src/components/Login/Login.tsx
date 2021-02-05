@@ -7,20 +7,22 @@ import {Done, Visibility, VisibilityOff} from "@material-ui/icons";
 import {IUser} from "./IUser";
 import {useHistory} from "react-router-dom";
 import {useSnackbar} from "notistack";
-import {MockUsers} from "../../mockData/InMemoryUsers";
 
 type UserProps = {
     setUser: (username: IUser) => void
 }
 
+
 const Login = ({setUser}: UserProps) => {
     let history = useHistory();
     const {enqueueSnackbar} = useSnackbar();
-    const [values, setValues] = useState({
+    const [values, setValues] = useState<any>({
         username: "",
         password: "",
         showPassword: false,
-        loginError: false
+        loginError: false,
+        fetchedUser: false,
+        loggingFailed: false
     });
 
     const handleChange = (prop: any) => (event: any) => {
@@ -35,31 +37,41 @@ const Login = ({setUser}: UserProps) => {
         event.preventDefault();
     };
 
-    const handleLogin = () => {
-        const user: IUser | undefined = MockUsers.USERS.find((user: IUser) => user.credentials.login === values.username && user.credentials.password === values.password);
-        if (user) {
-            enqueueSnackbar(`Logged successfuly! Welcome ${user.credentials.login}`, {variant: 'success'});
+    const handleLogin = async () => {
+        try {
+            const resp = await fetch("http://localhost:8080/login", {
+                headers: {'Authorization': 'Basic ' + window.btoa(values.username + ':' + values.password)}
+            });
+            if (!resp.ok) {
+                setValues({...values, loginError: true});
+                enqueueSnackbar(`Wrong credentials!`, {variant: 'error'});
+            }
+
+            const json = await resp.json();
+            localStorage.setItem("user", JSON.stringify(json));
+            setUser(json);
+            enqueueSnackbar(`Logged successfuly! Welcome ${values.username}`, {variant: 'success'});
             setValues({...values, loginError: false});
-            setUser(user);
             history.push("/");
-        } else {
+        } catch (e) {
             setValues({...values, loginError: true});
             enqueueSnackbar(`Wrong credentials!`, {variant: 'error'});
+            console.log(e);
         }
     }
 
-
-    return (<div>
-        <Container className="login-container col-md-5">
-            <Row className="justify-content-md-center">
-                <Col sm={6}>
-                    <h1>Login</h1>
-                    <hr/>
-                </Col>
-            </Row>
-            <Row className="justify-content-md-center">
-                <Col sm={6}>
-                    <FormControl>
+    return (
+        <div>
+            <Container className="login-container col-md-5">
+                <Row className="justify-content-md-center">
+                    <Col sm={6}>
+                        <h1>Login</h1>
+                        <hr/>
+                    </Col>
+                </Row>
+                <Row className="justify-content-md-center">
+                    <Col sm={6}>
+                        <FormControl>
                         <InputLabel>Username</InputLabel>
                         <Input
                             error={values.loginError}

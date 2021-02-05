@@ -1,8 +1,18 @@
 .CovidShop {
-  background-color: lightgray;
-  border-top: 10px solid grey;
-  display: inline-flex;
+  background-color: white ;
+  border-top: 20px solid #DBDBDB;
+  display: grid;
   margin: 0px;
   width: 100%;
+  grid-template-columns: 1fr auto auto auto ;
+
+}
+
+
+@media all and (max-width: 1150px) {
+  .CovidShop{
+    grid-template-columns: 1fr;
+  }
+
 
 }

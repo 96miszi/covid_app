@@ -1,13 +1,17 @@
+
+
 .shopProducts {
   align-items: center;
   align-content: center;
-  margin-left: 7%;
+  margin-left: 5.5%;
+
 }
 
 .product-cell {
   display: inline-flex;
   flex-wrap: wrap;
   grid-auto-flow: column;
+
 }
 
 .product {
@@ -18,15 +22,17 @@
   min-width: 300px;
   max-width: 400px;
   text-align: center;
-  font-family: arial;
+  font-family: Playfair Display, Georgia, Times New Roman, serif;
   width: 100%;
   margin-right: 1rem;
   flex: 1 46%;
+  border-bottom: 3px solid #dbdbdb;
 
 }
 
 p {
   word-wrap: break-word;
+
 }
 
 .product button {
@@ -34,11 +40,13 @@ p {
   outline: 0;
   padding: 12px;
   color: white;
-  background-color: #000;
+  background-color: rgba(23, 162, 184, 1);
   text-align: center;
   cursor: pointer;
   width: 90%;
   font-size: 18px;
+
+
 }
 
 .product button:hover {
@@ -46,11 +54,12 @@ p {
 }
 
 .price {
-  color: aliceblue;
+  color: #000;
   font-size: 22px;
 }
 
-img {
+
+.prodImg{
   max-width: 200px;
-  max-height: 100px;
+  max-height: 200px;
 }

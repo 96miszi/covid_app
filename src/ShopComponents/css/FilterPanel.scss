@@ -1,13 +1,20 @@
 .filter-panel-back {
-  background-color: whitesmoke;
-  height: 100vh;
+  background-color: white;
   width: 300px; //25vw;
-  min-width: 20vw;
-  max-width: 20vw;
+  max-width: 25vw;
+  min-width: 25vw;
+  min-height: 1000px;
   justify-content: start;
-  border-right: 10px solid grey;
+  border-right: 20px solid #DBDBDB;
   display: inline-block;
-  text-align: center
+  text-align: center;
+  color: #138EA1;
+  font-family: Playfair Display, Georgia, Times New Roman, serif;
+}
+
+.basket-total {
+  margin-top: 30px;
+  font-size: 1.5rem;
 
 }
 
@@ -15,11 +22,23 @@
   align-items: center;
   text-align: center;
   place-items: center;
+  margin-bottom: 30px;
   cursor: pointer;
   font-size: 18px;
+  opacity: 0.5;
+  background-color: white;
+  color: black;
+  border: 2px solid darkcyan; /* Green */
+  &:hover {
+    background: lightgray;
+    transition: 0.5s;
+  }
+
 }
-
-
+.filter-panel-item{
+  margin-left: 3%;
+  margin-top: 3%;
+}
 .bar {
   font-size: 1.5vw;
   background: none;
@@ -34,9 +53,35 @@
     transition: 0.5s;
   }
 
+  .basket-table-row {
+    background-color: black;
+
+    &:hover {
+      background: lightgray;
+      transition: 0.5s;
+    }
+  }
+
   li {
     white-space: nowrap;
   }
+
+
+}
+
+@media all and (max-width: 1150px) {
+  .filter-panel-back {
+    border: 0px solid;
+    min-height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+
+
+
+
+
 }
 
 
